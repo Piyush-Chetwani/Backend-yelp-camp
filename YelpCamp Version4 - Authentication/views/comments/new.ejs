@@ -1,0 +1,19 @@
+<ul>
+  <% if(!currentUser){ %>
+    <a href = "/register"><li> Signup </li> </a>
+    <a href = "/login"><li> Log in </li> </a>
+  <% } else { %>
+    <a> Signed In as <%= currentUser.username %></a>
+    <a href = "/logout"><li> Logout </li> </a>
+  <% } %>
+</ul>
+
+<h1> New Comment Form </h1>
+
+<h1> Add new comment to <%= campground.name %> </h1>
+
+<form action="/campgrounds/<%= campground._id %>/comments" method="POST">
+  <input type="text" placeholder="Text" name="comment[text]">
+  <input type="text" placeholder="Author" name="comment[author]">
+  <button> Submit </button>
+</form>

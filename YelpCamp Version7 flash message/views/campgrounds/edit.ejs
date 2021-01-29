@@ -1,0 +1,25 @@
+<ul>
+  <% if(!currentUser){ %>
+    <a href = "/register"><li> Signup </li> </a>
+    <a href = "/login"><li> Log in </li> </a>
+  <% } else { %>
+    <a> Signed In as <%= currentUser.username %></a>
+    <a href = "/logout"><li> Logout </li> </a>
+  <% } %>
+</ul>
+
+<% if(error && error.length>0){ %>
+  <b> <%= error %> </b>
+<% } %>
+<% if(success && success.length>0){ %>
+  <b> <%= success %> </b>
+<% } %>
+
+<h1> Edit <%= campground.name %> </h1>
+
+<form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
+  <input type="text" value = "<%= campground.name %>" name="name">
+  <input type="text" value = "<%= campground.image %>" name="image">
+  <input type="text" value = "<%= campground.description %>" name="desc">
+  <button> Submit </button>
+</form>

@@ -1,0 +1,16 @@
+<h1> Thi is show page </h1>
+
+<div>
+<h2><%= campground.name %></h2>
+<img src = "<%= campground.image %>">
+<%= campground.description %>
+
+<% campground.comments.forEach(function(comment){ %>
+  <p>
+    <strong><%= comment.author %></strong> - <%= comment.text %>
+  </p>
+<% }) %>
+  <a href="/campgrounds/<%= campground._id %>/comments/new">
+  <button type="button" name="button"> Add new comment</button>
+  </a>
+</div>

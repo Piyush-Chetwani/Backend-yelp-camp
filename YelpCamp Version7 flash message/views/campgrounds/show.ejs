@@ -1,0 +1,51 @@
+<ul>
+  <% if(!currentUser){ %>
+    <a href = "/register"><li> Signup </li> </a>
+    <a href = "/login"><li> Log in </li> </a>
+  <% } else { %>
+    <a> Signed In as <%= currentUser.username %> </a>
+    <a href = "/logout"><li> Logout </li> </a>
+  <% } %>
+</ul>
+
+<% if(error && error.length>0){ %>
+  <b> <%= error %> </b>
+<% } %>
+<% if(success && success.length>0){ %>
+  <b> <%= success %> </b>
+<% } %>
+
+<h1> This is show page </h1>
+
+<div>
+<h2><%= campground.name %></h2>
+<img src = "<%= campground.image %>">
+<%= campground.description %>
+<p> Submitted by: </p>
+<%= campground.author.username %>
+
+<% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+  <a href="/campgrounds/<%= campground._id %>/edit"><button type="button"> Edit </button> </a>
+  <form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+  <button> Delete </button>
+  </form>
+<% } %>
+
+
+<% campground.comments.forEach(function(comment){ %>
+  <p>
+    <strong><%= comment.author.username %></strong> - <%= comment.text %>
+    <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+      <a href="/campgrounds/<%= campground._id %>/comments/comment._id/edit">
+        <button type="button" name="button">EDIT</button>
+      <a>
+      <form action="/campgrounds/<%= campground._id %>/comments/comment._id?_method=DELETE" method="POST">
+        <button type="button"> DELETE </button>
+      </form>
+    <% } %>
+  </p>
+<% }) %>
+  <a href="/campgrounds/<%= campground._id %>/comments/new">
+  <button type="button" name="button"> Add new comment</button>
+  </a>
+</div>

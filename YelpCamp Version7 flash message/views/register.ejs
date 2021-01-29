@@ -1,0 +1,22 @@
+<ul>
+  <% if(!currentUser){ %>
+    <a href = "/register"><li> Signup </li> </a>
+    <a href = "/login"><li> Log in </li> </a>
+  <% } else { %>
+    <a> Signed In as <%= currentUser.username %></a>
+    <a href = "/logout"><li> Logout </li> </a>
+  <% } %>
+</ul>
+
+<% if(error && error.length>0){ %>
+  <b> <%= error %> </b>
+<% } %>
+<% if(success && success.length>0){ %>
+  <b> <%= success %> </b>
+<% } %>
+
+<form action="/register" method="POST">
+  <input type="text" placeholder="username" name="username">
+  <input type="password" placeholder="password" name="password">
+  <button> Sign Up </button>
+</form>
